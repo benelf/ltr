@@ -175,7 +175,6 @@ sub filter {
   my (@args) = @_;
 
 
-  die 'asss' . $_;
 
   return 'lslsls';
 }
