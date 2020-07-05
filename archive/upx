@@ -1,0 +1,87 @@
+#!/bin/dash
+# Copyright (c) 2020 ben
+# Licensed under the GPL license. See Copying.txt in the project root.
+
+
+HELP="Print the result of a Perl expression"
+USAGE="<expression> [expression arg]" 
+
+
+#cwd=$(pwd)
+#cwd_base=$(basename $cwd)
+#
+#die () { echo "$@" 1>&2; exit 1; }
+#warn () { echo "$@" 1>&2; }
+#usage () { [ -n "$1" ] && warn "$1"; local app=$(basename $0); die "usage - $app: $USAGE"; }
+#help () { warn "Help: $HELP" ; usage ; }
+#cmdcheck () { for c in $@ ; do 
+#  command -v $c >/dev/null 2>&1 || die "Err: no cmd '$c' installed"  ; 
+#done ; }
+#
+#
+#realpath () { perl -MCwd -le 'print Cwd::realpath($ARGV[0])' $1; }
+#cleanup () { echo ok ; }
+#
+#
+#parse () {
+#  while [ $# -gt 0 ]; do
+#     arg="$1"
+#     shift
+#     case "$arg" in
+#        -h|--help) help ;;
+#        -m) 
+#          module_input=$1
+#          shift
+#          ;;
+#        -*) die "Err: invalid option use -h for help" ;;
+#        *) 
+#          if [ -z "$expression_input" ] ; then
+#            expression_input="$arg"
+#          else
+#           expression_args="${expression_args} $arg"
+#          fi
+#        ;;
+#    esac
+#  done
+#}
+#
+#
+uperl_dir=$(dirname $0)
+
+uperl="${uperl_dir}/uperl"
+
+uperl_module="$uperl_dir/Upl.pm" 
+
+
+expr_expr=$1
+shift
+
+if [ -n "$expr_expr" ] ; then
+
+
+     echo xxxx ${uperl} -I${uperl_dir} -MUpl -e "Upl::import();  print(join('$res', $expression_input))" $@
+
+     ${uperl} -I${uperl_dir} -MUpl -e "Upl::import(); \$_ = \$ARGV[0]; print(join('$res', $expr_expr));" $@
+
+     echo bye
+
+exit
+
+  if [ "x$@" = "x" ] ;then
+     #echo ${uperl} -I${uperl_dir} -MUpl -e "Upl::import(); my @res = map { $expression_input } @ARGV; print(join('$res', @res));" $expression_args
+#     ${uperl} -I${uperl_dir} -MUpl -e "Upl::import();  my @res = map { $expression_input }  @ARGV; print(join('$res', @res));" $expression_args
+#
+     ${uperl} -I${uperl_dir} -MUpl -e "Upl::import();  my @res =  \$1 ; \$v =(join('$res', @res));" 
+   else
+   echo ffff$@xx
+  fi
+else
+  if which rlwrap >> /dev/null ; then
+      echo 'Interactive Perl Shell'
+      rlwrap -A -pgreen -S"perl> " ${uperl} -w -n -e 'chomp; ($r) = eval(); print(($@) ? $@ : "$_ = $r\n");';
+    else
+      ${uperl} -w -n -e 'chomp; ($r) = eval(); print(($@) ? $@ : "$_ = $r\n");';
+  fi
+fi
+
+#trap "cleanup" EXIT

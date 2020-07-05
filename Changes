@@ -1,0 +1,6 @@
+Revision history for Perl extension Nano::Pl.
+
+0.01  Sat Jul  4 16:35:50 2020
+	- original version; created by h2xs 1.23 with options
+		-AXn Nano::Pl
+

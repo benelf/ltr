@@ -1,0 +1,6 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/Nano-Pl.t
+lib/App/Nanopl.pm

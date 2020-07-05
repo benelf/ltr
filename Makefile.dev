@@ -1,0 +1,7 @@
+vif:
+	perl -I./lib upl '"test.txt" | cat | "x " . $$_'
+	@#./upl 'ls "/" | /i/ && $$_ | "x " . $$_ | sort'
+
+install:
+	perl Makefile.PL LIB=$$HOME/libs/perl
+	make install

@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+
+
+my $HELP = '';
+
+my $USAGE = '';
+
+use strict; use warnings;
+
+use App::Ltor;
+
+use Data::Dumper qw(Dumper);
+
+#my $pl = '"test.txt" "foo.bar" | cat  | "x " . $_';
+my $pl = $ARGV[0];
+
+
+my ($res) = App::Ltor::pipe($pl);
+
+print(join("\n", @$res));
