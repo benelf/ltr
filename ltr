@@ -7,7 +7,7 @@ my $USAGE = '';
 
 use strict; use warnings;
 
-use App::Ltor;
+use App::Ltr;
 
 use Data::Dumper qw(Dumper);
 
@@ -15,6 +15,6 @@ use Data::Dumper qw(Dumper);
 my $pl = $ARGV[0];
 
 
-my ($res) = App::Ltor::pipe($pl);
+my ($res) = App::Ltr::pipe($pl);
 
 print(join("\n", @$res));
